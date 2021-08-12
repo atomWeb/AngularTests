@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { MedicoService } from './medico.service';
 
 @Component({
   selector: 'app-medico',
   templateUrl: './medico.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class MedicoComponent implements OnInit {
+  medicos: any[] = [];
 
-  constructor() { }
+  constructor(private medicoService: MedicoService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  saludarMedico(name: string): string {
+    return `Hola ${name}`;
   }
 
+  obtenerMedicos() {
+    this.medicoService.getMedicos().subscribe((medicos: any) => {
+      this.medicos = medicos;
+    });
+  }
 }
